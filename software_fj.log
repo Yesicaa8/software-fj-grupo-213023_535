@@ -1,0 +1,25 @@
+2026-11-16 16:48:19,181 | INFO | Sistema Software FJ iniciado
+2026-11-16 16:48:19,182 | INFO | Costo calculado para Sala test: $200000.00
+2026-11-16 16:48:19,182 | INFO | Costo calculado para Sala test: $238000.00
+2026-11-16 16:48:19,183 | INFO | Costo calculado para Sala test: $214200.00
+2026-11-16 16:48:19,185 | ERROR | Error al calcular el costo del servicio Sala test.
+Traceback (most recent call last):
+  File "c:\Users\natha\OneDrive\Documentos\GitHub\software-fj-grupo-213023_535\Codigo_Partes_1_y_2_Brayan_Logs_Excepciones_Cliente.py", line 215, in calcular_costo_total
+    raise ServicioInvalidoError(
+        f"{nombre} debe estar entre 0 y 1."
+    )
+ServicioInvalidoError: Impuesto debe estar entre 0 y 1.
+2026-11-16 16:48:19,205 | ERROR | Error al calcular el costo del servicio Sala test.
+Traceback (most recent call last):
+  File "c:\Users\natha\OneDrive\Documentos\GitHub\software-fj-grupo-213023_535\Codigo_Partes_1_y_2_Brayan_Logs_Excepciones_Cliente.py", line 215, in calcular_costo_total
+    raise ServicioInvalidoError(
+        f"{nombre} debe estar entre 0 y 1."
+    )
+ServicioInvalidoError: Descuento debe estar entre 0 y 1.
+2026-11-16 16:48:19,207 | ERROR | Error al calcular el costo del servicio Sala cerrada.
+Traceback (most recent call last):
+  File "c:\Users\natha\OneDrive\Documentos\GitHub\software-fj-grupo-213023_535\Codigo_Partes_1_y_2_Brayan_Logs_Excepciones_Cliente.py", line 221, in calcular_costo_total
+    raise ServicioNoDisponibleError(
+        f"El servicio {self.nombre} no esta disponible."
+    )
+ServicioNoDisponibleError: El servicio Sala cerrada no esta disponible.

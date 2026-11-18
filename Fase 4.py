@@ -268,3 +268,149 @@ class Servicio(Entidad):
             raise CalculoInconsistenteError(
                 "No fue posible calcular el costo del servicio."
             ) from error
+            
+# SERVICIO 1: RESERVA DE SALAS
+
+
+class ReservaSala(Servicio):
+
+    def __init__(self, nombre, precio_base, capacidad, horas, disponible=True):
+        super().__init__(nombre, precio_base, disponible)
+        self._capacidad = capacidad
+        self._horas = horas
+        self.validar_parametros()
+
+        logger.info(f"Servicio de reserva de sala creado: {self.nombre}")
+
+    def validar_parametros(self):
+        if (
+            isinstance(self._capacidad, bool)
+            or not isinstance(self._capacidad, int)
+            or self._capacidad <= 0
+        ):
+            raise ServicioInvalidoError(
+                "La capacidad de la sala debe ser un entero mayor que cero."
+            )
+
+        if (
+            isinstance(self._horas, bool)
+            or not isinstance(self._horas, (int, float))
+            or not math.isfinite(self._horas)
+            or self._horas <= 0
+        ):
+            raise ServicioInvalidoError(
+                "Las horas de reserva deben ser mayores que cero."
+            )
+
+    def calcular_costo(self):
+        return self.precio_base * self._horas
+
+    def describir(self):
+        return (
+            f"Reserva de sala: {self.nombre} | "
+            f"Capacidad: {self._capacidad} personas | "
+            f"Duración: {self._horas} horas"
+        )
+
+
+# SERVICIO 2: ALQUILER DE EQUIPOS
+
+
+class AlquilerEquipo(Servicio):
+
+    def __init__(
+        self, nombre, precio_base, tipo_equipo, horas,
+        cantidad=1, disponible=True
+    ):
+        super().__init__(nombre, precio_base, disponible)
+        self._tipo_equipo = tipo_equipo
+        self._horas = horas
+        self._cantidad = cantidad
+        self.validar_parametros()
+
+        logger.info(f"Servicio de alquiler de equipos creado: {self.nombre}")
+
+    def validar_parametros(self):
+        if (
+            not isinstance(self._tipo_equipo, str)
+            or len(self._tipo_equipo.strip()) < 2
+        ):
+            raise ServicioInvalidoError(
+                "Debe indicar un tipo de equipo válido."
+            )
+
+        if (
+            isinstance(self._horas, bool)
+            or not isinstance(self._horas, (int, float))
+            or not math.isfinite(self._horas)
+            or self._horas <= 0
+        ):
+            raise ServicioInvalidoError(
+                "Las horas de alquiler deben ser mayores que cero."
+            )
+
+        if (
+            isinstance(self._cantidad, bool)
+            or not isinstance(self._cantidad, int)
+            or self._cantidad <= 0
+        ):
+            raise ServicioInvalidoError(
+                "La cantidad de equipos debe ser un entero mayor que cero."
+            )
+
+    def calcular_costo(self):
+        return self.precio_base * self._horas * self._cantidad
+
+    def describir(self):
+        return (
+            f"Alquiler de equipo: {self.nombre} | "
+            f"Tipo: {self._tipo_equipo} | "
+            f"Cantidad: {self._cantidad} | "
+            f"Duración: {self._horas} horas"
+        )
+
+# SERVICIO 3: ASESORÍA ESPECIALIZADA
+
+class AsesoriaEspecializada(Servicio):
+
+    def __init__(
+        self, nombre, precio_base, especialidad, horas,
+        disponible=True
+    ):
+        super().__init__(nombre, precio_base, disponible)
+        self._especialidad = especialidad
+        self._horas = horas
+        self.validar_parametros()
+
+        logger.info(f"Servicio de asesoría creado: {self.nombre}")
+
+    def validar_parametros(self):
+        if (
+            not isinstance(self._especialidad, str)
+            or len(self._especialidad.strip()) < 3
+        ):
+            raise ServicioInvalidoError(
+                "Debe indicar una especialidad válida."
+            )
+
+        if (
+            isinstance(self._horas, bool)
+            or not isinstance(self._horas, (int, float))
+            or not math.isfinite(self._horas)
+            or self._horas <= 0
+        ):
+            raise ServicioInvalidoError(
+                "Las horas de asesoría deben ser mayores que cero."
+            )
+
+    def calcular_costo(self):
+        return self.precio_base * self._horas
+
+    def describir(self):
+        return (
+            f"Asesoría especializada: {self.nombre} | "
+            f"Especialidad: {self._especialidad} | "
+            f"Duración: {self._horas} horas"
+        )
+
+
